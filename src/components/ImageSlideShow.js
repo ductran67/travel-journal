@@ -25,7 +25,7 @@ const ImageSlideShow = ({ posts }) => {
 }
 
 ImageSlideShow.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default ImageSlideShow
