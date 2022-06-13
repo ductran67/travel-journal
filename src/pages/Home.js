@@ -5,6 +5,7 @@ import Post from '../components/Post';
 import ReactPaginate from 'react-paginate';
 import '../components/Pagination.css';
 import PropTypes from 'prop-types';
+import { FcPrevious, FcNext } from 'react-icons/fc';
 
 const Home = ({ postList }) => {
   const [toggleSlideShow, setToggleSlideShow] = useState(true);
@@ -54,8 +55,8 @@ const Home = ({ postList }) => {
           {/* Rendering the pagination buttons */}
           <Row className='pt-2'>
             <ReactPaginate
-              previousLabel={"Previous"}
-              nextLabel={"Next"}
+              previousLabel={<FcPrevious />}
+              nextLabel={<FcNext />}
               pageCount={pageCount}
               onPageChange={changePage}
               containerClassName={"paginationBttns"}

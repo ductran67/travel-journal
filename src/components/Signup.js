@@ -28,6 +28,7 @@ const Signup = () => {
         email,
         timeStamp: serverTimestamp()
       });
+      alert('You have signed up successful. Now you can login with your email and password.')
       navigate("/login");
     } catch (err) {
       setError(err.message);

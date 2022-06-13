@@ -8,6 +8,7 @@ import {
   deleteDoc,
   doc,
   collectionGroup,
+  getDoc,
 } from "firebase/firestore";
 import Post from "../components/Post";
 import { useUserAuth } from "../context/UserAuthContext";
@@ -33,10 +34,25 @@ const FavoritePost = () => {
     const unsubscribe = onSnapshot(
       myFavoritePostsQuery,
       snapshot => {
-        setMyFavoritePosts(snapshot.docs.map(doc => ({
-          id: doc.id,
-          data: doc.data()
-        })));
+        // Get postId & userId from myFavoritePosts collection
+        snapshot.docs.forEach((myFP) => {
+          // Get data from posts collection
+          // console.log(myFP.data().postId, myFP.data().userId);
+          if (myFP.data().postId && myFP.data().userId) {
+            const postRef = doc(db, "users", myFP.data().userId, "posts", myFP.data().postId);
+            getDoc(postRef).then(docSnap => {
+              console.log(docSnap.data());
+              if (docSnap.exists()) {
+                // store in state
+                setMyFavoritePosts(previousState => [...previousState, {id: myFP.id, postId: myFP.data().postId, data: docSnap.data()}])
+              } else {
+                // show error
+                // console.log('Error here')
+                setError(true);
+              }
+            });
+          };
+        });
         setLoading(false);
       },
       reason => {
@@ -91,11 +107,12 @@ const FavoritePost = () => {
     )
   };
 
-  const deleteMyFavoritePost = async (postId) => {
+  const deleteMyFavoritePost = async (myFPId) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        const myFavoritePostRef = doc(db, "users", user.uid, "myFavoritePosts", postId);
+        const myFavoritePostRef = doc(db, "users", user.uid, "myFavoritePosts", myFPId);
         await deleteDoc(myFavoritePostRef);
+        setMyFavoritePosts(myFavoritePosts.filter(item => item.id !== myFPId));
       } catch (error) {
         setError(true);
       }

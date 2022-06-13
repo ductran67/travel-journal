@@ -12,6 +12,11 @@ h3 {
 
 .bottom__line {
   border-bottom: 1px solid gray;
+  margin-bottom: 3px;
+}
+
+.top__line {
+  border-top: 1px solid lightslategray;
 }
 
 .g-btn {

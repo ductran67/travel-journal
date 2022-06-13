@@ -68,13 +68,7 @@ const PostDetail = ({ userMode }) => {
       try {
         const myFavoritePostsRef = collection(db, 'users', user.uid, 'myFavoritePosts');
         await addDoc(myFavoritePostsRef, {
-            title: postDetail.title,
-            city: postDetail.city,
-            country: postDetail.country,
-            content: postDetail.content,
             userId: postDetail.userId,
-            image: postDetail.image,
-            postedDate: postDetail.postedDate,
             postId: id,
             createdAt: serverTimestamp()
         });

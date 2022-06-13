@@ -16,6 +16,7 @@ import PostDetail from "./pages/PostDetail";
 import FavoritePost from "./pages/FavoritePost";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import Spinner from 'react-bootstrap/Spinner';
+import Footer from "./components/Footer";
 function App() {
   // Define vars to collect post's data from firestore
   const [loading, setLoading] = useState(true);
@@ -84,6 +85,7 @@ function App() {
           <Route path="/favoritePost" element={<FavoritePost />} />
           <Route path="/postDetail/:id" element={<PostDetail userMode={signIn} />} />
         </Routes>
+        <Footer />
       </UserAuthContextProvider>
     </Router>
   );

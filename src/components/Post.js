@@ -9,7 +9,6 @@ const Post = ({ post, showUsername, fromFavoritePostPage }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [user, setUser] = useState([]);
-
   useEffect(() => {
     // Get the post's user info
     const userRef = doc(db, 'users', post.data.userId);
@@ -36,12 +35,12 @@ const Post = ({ post, showUsername, fromFavoritePostPage }) => {
 
   return (
     <Card className='mb-2'>
-      <Link to={fromFavoritePostPage ? `/postDetail/${post.data.postId}`: `/postDetail/${post.id}`}>
+      <Link to={fromFavoritePostPage ? `/postDetail/${post.postId}`: `/postDetail/${post.id}`}>
         {post.data.image ? <Card.Img src = {post.data.image} alt={post.data.title} className="w-100" /> : ''}
       </Link>
 
       <Card.Body>
-        <Link to={fromFavoritePostPage? `/postDetail/${post.data.postId}`: `/postDetail/${post.id}`}>
+        <Link to={fromFavoritePostPage? `/postDetail/${post.postId}`: `/postDetail/${post.id}`}>
           <Card.Title>{post.data.title}</Card.Title>
         </Link>
         <Card.Text>
