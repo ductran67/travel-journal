@@ -13,7 +13,7 @@ import Alert from 'react-bootstrap/Alert';
 import { Card, Container, Form, Button } from "react-bootstrap";
 import PropTypes from 'prop-types';
 
-const AddEditPost = ({ userId, postId, addForm }) => {
+const AddEditPost = ({ userId, postId, returnAddForm }) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [city, setCity] = useState("");
@@ -106,7 +106,7 @@ const AddEditPost = ({ userId, postId, addForm }) => {
     setDownloadURL('');
     imageInputRef.current.value="";
     // Return AddPost Form
-    addForm();
+    returnAddForm();
   };
 
   return (
@@ -175,11 +175,11 @@ const AddEditPost = ({ userId, postId, addForm }) => {
   )
 }
 
-// Define props types for userId, postId, addForm
+// Define props types for userId, postId, returnAddForm
 AddEditPost.propTypes = {
   userId: PropTypes.string.isRequired,
   postId: PropTypes.string,
-  addForm: PropTypes.func.isRequired
+  returnAddForm: PropTypes.func.isRequired
 }
 
 export default AddEditPost

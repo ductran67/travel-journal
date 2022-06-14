@@ -15,6 +15,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
     try {
       // await signUp(email, password);
       const res = await createUserWithEmailAndPassword(
@@ -33,17 +34,19 @@ const Signup = () => {
     } catch (err) {
       setError(err.message);
     }
+
   };
 
   return (
     <Container style={{ width: "400px" }}>
       <div className="p-4 box">
-        <h2 className="mb-3">Sign Up</h2>
+        <h3 className="mb-3 text-center">Sign Up</h3>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Control
               type="text"
+              value={username}
               placeholder="Display name"
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -51,6 +54,7 @@ const Signup = () => {
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
+              value={email}
               placeholder="Email address"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -74,7 +78,7 @@ const Signup = () => {
       <div className="p-4 box mt-3 text-center">
         Already have an account? <Link to="/login">Log In</Link>
       </div>
-    </Container>    
+    </Container>
   );
 }
 

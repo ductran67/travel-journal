@@ -75,7 +75,7 @@ const Login = ({ checkLogin }) => {
   return (
     <Container style={{ width: "400px" }}>
       <div className="p-4 box">
-        <h2 className="mb-3">Sign In</h2>
+        <h3 className="mb-3 text-center">Sign In</h3>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">

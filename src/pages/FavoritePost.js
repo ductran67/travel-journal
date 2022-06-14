@@ -28,26 +28,25 @@ const FavoritePost = () => {
     if (!user) {
       return;
     }
-
+    // Define query to retrieve my favorite posts data from firestore database
     const myFavoritePostsRef = collection(db, "users", user.uid, "myFavoritePosts");
     const myFavoritePostsQuery = query(myFavoritePostsRef, orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(
       myFavoritePostsQuery,
       snapshot => {
+        // Reset myFavoritePosts state hook
+        setMyFavoritePosts([]);
         // Get postId & userId from myFavoritePosts collection
         snapshot.docs.forEach((myFP) => {
           // Get data from posts collection
-          // console.log(myFP.data().postId, myFP.data().userId);
           if (myFP.data().postId && myFP.data().userId) {
             const postRef = doc(db, "users", myFP.data().userId, "posts", myFP.data().postId);
             getDoc(postRef).then(docSnap => {
-              console.log(docSnap.data());
               if (docSnap.exists()) {
                 // store in state
-                setMyFavoritePosts(previousState => [...previousState, {id: myFP.id, postId: myFP.data().postId, data: docSnap.data()}])
+                setMyFavoritePosts(myFavoritePosts => [...myFavoritePosts, {id: myFP.id, postId: myFP.data().postId, data: docSnap.data()}])
               } else {
                 // show error
-                // console.log('Error here')
                 setError(true);
               }
             });
@@ -90,9 +89,7 @@ const FavoritePost = () => {
         setLoading(false);
       }
     );
-
     return () => unsubscribe();
-
   }, []);
 
   if (error) {
@@ -134,7 +131,7 @@ const FavoritePost = () => {
 
       <Row>
         <Col>
-          <div className='title'>My favorite Posts</div>
+          <h3 className='title'>My favorite Posts</h3>
 
           {myFavoritePosts.length > 0 ? (
             <>
@@ -158,7 +155,7 @@ const FavoritePost = () => {
         </Col>
         {/* Image Slide Show area */}
         <Col className={toggleSlideShow? "show":"hide"}>
-          <div className='title'>Image Slide Show</div>
+          <h3 className='title'>Unforgettable Places Slide Show</h3>
           {posts.length > 0 ? (<ImageSlideShow posts={posts} />):('')}
         </Col>
       </Row>

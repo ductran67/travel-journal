@@ -87,13 +87,13 @@ const PostDetail = ({ userMode }) => {
 
   return (
     <Container fluid>
-      <div className='title bottom__line'>Post Detail</div>
+      <div className='title bottom__line'>{postDetail.title}</div>
       <Row>
         <Col>
           <Card className='mb-2'>
             {postDetail.image ? <Card.Img src = {postDetail.image} alt={postDetail.title} /> : ''}
             <Card.Body>
-              <Card.Title>{postDetail.title}</Card.Title>
+              {/* <Card.Title>{postDetail.title}</Card.Title> */}
               <Card.Text>
                 {postDetail.postedDate ? `Posted date: ${postDetail.postedDate.toDate().toLocaleDateString()}`: ''} 
                 {` - Author: ${userDetail.username}`}

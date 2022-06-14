@@ -108,11 +108,11 @@ const UserHome = () => {
         {/* Post Form area */}
         <Col className={toggleDisplay ? 'show' : 'hide'}>
           {/* AddEditPost Component */}
-          <AddEditPost userId = {user.uid} postId={postId} addForm = {returnAddForm} />
+          <AddEditPost userId = {user.uid} postId={postId} returnAddForm = {returnAddForm} />
         </Col>
         {/* User's Post-List area */}
         <Col>
-          <h3 className='title'>My Post List</h3>
+          <h3 className='title'>My Post-List</h3>
           <Button variant="outline-primary" onClick={()=> toggleAddPostForm()}>
             {toggleDisplay? "Close Add New Post Form" : "Add New Post"}
           </Button>
@@ -146,7 +146,7 @@ const UserHome = () => {
         </Col>
         {/* Post Form */}
         <Col className={!toggleDisplay && toggleSlideShow ? 'show' : 'hide'}>
-          <h3 className='title'>My Posts Slide Show</h3>
+          <h3 className='title'>My Posts Image Slide Show</h3>
           {posts.length > 0 ? (<ImageSlideShow posts={posts} />):('')}
         </Col>
       </Row>

@@ -44,7 +44,7 @@ const Home = ({ postList }) => {
       <Row>
         {/* Post-List area */}
         <Col>
-          <h3 className='title mb-2'>Post List</h3>
+          <h3 className='title mb-2'>Post-List</h3>
           {postList.length > 0 ? (
             <>
               {displayPosts}
@@ -69,7 +69,7 @@ const Home = ({ postList }) => {
         </Col>
         {/* Image Slide Show area */}
         <Col className={toggleSlideShow? "show":"hide"}>
-          <h3 className='title mb-2'>Image Slide Show</h3>
+          <h3 className='title mb-2'>Unforgettable Places Slide Show</h3>
           {postList.length > 0 ? (<ImageSlideShow posts={postList} />):('')}
         </Col>
       </Row>

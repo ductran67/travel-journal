@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FiMenu, FiX } from 'react-icons/fi';
 import './NavBar.css';
 import { useNavigate } from "react-router";
@@ -25,10 +25,10 @@ const NavBar = ({ userMode, checkLogin }) => {
       setLoading(false);
       if (docSnap.exists()) {
         // store in state
-        setUsername(docSnap.data());
+        setUsername(docSnap.data().username);
       } else {
         // show error
-        return <p>Cannot get user's info. Please try again.</p>;
+        return <p>Cannot get username. Please try again.</p>;
       }
     });
   },[user, userMode]);
@@ -54,39 +54,66 @@ const NavBar = ({ userMode, checkLogin }) => {
 
   return (
 		<nav className="navbar">
-			<Link to="/" className="nav-logo">
+			<NavLink to="/" className="nav-logo">
         <img className='nav-img' src={logo} alt='logo' />
         Travel Journal
-      </Link>
+      </NavLink>
 			<div onClick={()=>setOpen(!open)} className="nav-icon">
 				{open ? <FiX /> : <FiMenu />}
 			</div>
       {userMode? (
         <ul className={open ? 'nav-links active' : 'nav-links'}>
           <li className="nav-item">
-            <Link to="/" className="nav-link" onClick={()=>setOpen(false)}>Home</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? 'active nav-link' : 'inactive nav-link')}
+              onClick={()=>setOpen(false)}
+            >
+              Home
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/userHome" className="nav-link" onClick={()=>setOpen(false)}>My Posts</Link>
+            <NavLink
+              to="/userHome"
+              className={({ isActive }) => (isActive ? 'active nav-link' : 'inactive nav-link')}
+              onClick={()=>setOpen(false)}
+            >
+              My Posts
+            </NavLink>
           </li>
           <li className="nav-item">
-            <Link to="/favoritePost" className="nav-link" onClick={()=>setOpen(false)}>My Favorite Posts</Link>
+            <NavLink
+              to="/favoritePost"
+              className={({ isActive }) => (isActive ? 'active nav-link' : 'inactive nav-link')}
+              onClick={()=>setOpen(false)}
+            >
+              My Favorite Posts
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink
+              to={`/profile/${user.uid}`}
+              className={({ isActive }) => (isActive ? 'active nav-link' : 'inactive nav-link')}
+              onClick={()=>setOpen(false)}
+            >
+              My Profile
+            </NavLink>
           </li>
           <li className="nav-item">
             <Button onClick={handleLogout} variant="primary" size="sm">Log out</Button>
-            <div className='nav-text'>{username.username}</div>
+            <div className='nav-text'>{username}</div>
           </li>
         </ul>
         ):(
           <ul className={open ? 'nav-links active' : 'nav-links'}>
             <li className="nav-item">
-              <Link to="/" className="nav-link" onClick={()=>setOpen(false)}>Home</Link>
+              <NavLink to="/" className="nav-link" onClick={()=>setOpen(false)}>Home</NavLink>
             </li>
     
             <li className="nav-item">
-              <Link to="/login" className="nav-link" onClick={()=>setOpen(false)}>
+              <NavLink to="/login" className="nav-link" onClick={()=>setOpen(false)}>
                 Login
-              </Link>
+              </NavLink>
             </li>
           </ul>
         )}
