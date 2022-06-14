@@ -34,17 +34,18 @@ const FavoritePost = () => {
     const unsubscribe = onSnapshot(
       myFavoritePostsQuery,
       snapshot => {
-        // Reset myFavoritePosts state hook
-        setMyFavoritePosts([]);
+        // Reset myFavoritePostArray
+        let myFavoritePostArray = [];
         // Get postId & userId from myFavoritePosts collection
         snapshot.docs.forEach((myFP) => {
           // Get data from posts collection
           if (myFP.data().postId && myFP.data().userId) {
             const postRef = doc(db, "users", myFP.data().userId, "posts", myFP.data().postId);
             getDoc(postRef).then(docSnap => {
+
               if (docSnap.exists()) {
-                // store in state
-                setMyFavoritePosts(myFavoritePosts => [...myFavoritePosts, {id: myFP.id, postId: myFP.data().postId, data: docSnap.data()}])
+                myFavoritePostArray = [...myFavoritePostArray, {id: myFP.id, postId: myFP.data().postId, data: docSnap.data()}]
+                setMyFavoritePosts(myFavoritePostArray);
               } else {
                 // show error
                 setError(true);
