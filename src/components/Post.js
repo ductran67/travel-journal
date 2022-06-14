@@ -44,7 +44,7 @@ const Post = ({ post, showUsername, fromFavoritePostPage }) => {
           <Card.Title>{post.data.title}</Card.Title>
         </Link>
         <Card.Text>
-          {post.data.postedDate ? `Posted date: ${post.data.postedDate.toDate().toLocaleDateString()}`: ''} 
+          {post.data.postedDate ? `Last modified: ${post.data.postedDate.toDate().toLocaleDateString()}`: ''} 
           {showUsername ? ` - Author: ${user.username}` : ''}
         </Card.Text>
       </Card.Body>

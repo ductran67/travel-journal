@@ -95,7 +95,7 @@ const PostDetail = ({ userMode }) => {
             <Card.Body>
               {/* <Card.Title>{postDetail.title}</Card.Title> */}
               <Card.Text>
-                {postDetail.postedDate ? `Posted date: ${postDetail.postedDate.toDate().toLocaleDateString()}`: ''} 
+                {postDetail.postedDate ? `Last modified: ${postDetail.postedDate.toDate().toLocaleDateString()}`: ''} 
                 {` - Author: ${userDetail.username}`}
               </Card.Text>
             </Card.Body>
